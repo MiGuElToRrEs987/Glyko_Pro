@@ -1,0 +1,281 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX_PRODUCTOS 5
+
+typedef struct {
+    char nombre[50];
+    float precio;
+    int inventario;
+} Producto;
+
+Producto inventario[MAX_PRODUCTOS];
+
+void inicializarInventario() {
+    // Configura los productos iniciales y su inventario
+    strcpy(inventario[0].nombre, "Dulce 1");
+    inventario[0].precio = 10.0;
+    inventario[0].inventario = 5;
+
+    strcpy(inventario[1].nombre, "Dulce 2");
+    inventario[1].precio = 15.0;
+    inventario[1].inventario = 3;
+
+    strcpy(inventario[2].nombre, "Dulce 3");
+    inventario[2].precio = 12.0;
+    inventario[2].inventario = 7;
+
+    strcpy(inventario[3].nombre, "Dulce 4");
+    inventario[3].precio = 8.0;
+    inventario[3].inventario = 10;
+
+    strcpy(inventario[4].nombre, "Dulce 5");
+    inventario[4].precio = 20.0;
+    inventario[4].inventario = 2;
+}
+
+void mostrarProductos() {
+    printf("Productos disponibles:\n");
+    for (int i = 0; i < MAX_PRODUCTOS; i++) {
+        printf("%d. %s - Precio: %.2f - Inventario: %d\n", i + 1, inventario[i].nombre, inventario[i].precio,
+               inventario[i].inventario);
+    }
+}
+
+void comprarProducto(int producto) {
+    if (producto < 1 || producto > MAX_PRODUCTOS) {
+        printf("Opción inválida. Por favor, seleccione un producto válido.\n");
+        return;
+    }
+
+    int cantidad;
+    printf("Ingrese la cantidad de %s a comprar: ", inventario[producto - 1].nombre);
+    scanf("%d", &cantidad);
+
+    if (cantidad > inventario[producto - 1].inventario) {
+        printf("No hay suficiente inventario. Por favor, elija una cantidad menor.\n");
+        return;
+    }
+
+    float total = inventario[producto - 1].precio * cantidad;
+    printf("El total a pagar es: %.2f\n", total);
+
+    float pago;
+    printf("Ingrese el monto de pago: ");
+    scanf("%f", &pago);
+
+    if (pago < total) {
+        printf("El pago es insuficiente. No se puede completar la compra.\n");
+        return;
+    }
+
+    float cambio = pago - total;
+    printf("Su cambio es: %.2f\n", cambio);
+
+    // Lógica para despachar el producto
+    printf("Despachando %d %s...\n", cantidad, inventario[producto - 1].nombre);
+    inventario[producto - 1].inventario -= cantidad;
+}
+
+void resurtirMaquina() {
+    printf("Resurtir la máquina:\n");
+    for (int i = 0; i < MAX_PRODUCTOS; i++) {
+        int cantidad;
+        printf("Ingrese la cantidad de %s a resurtir: ", inventario[i].nombre);
+        scanf("%d", &cantidad);
+        inventario[i].inventario += cantidad;
+    }
+}
+
+void mostrarInformacionAdmin() {
+    printf("Información del administrador:\n");
+    // Lógica para mostrar saldo, número de ventas, etc.
+    // ...
+}
+
+void eliminarProducto(int producto) {
+    if (producto < 1 || producto > MAX_PRODUCTOS) {
+        printf("Opción inválida. Por favor, seleccione un producto válido.\n");
+        return;
+    }
+
+    printf("Eliminando %s del inventario...\n", inventario[producto - 1].nombre);
+    strcpy(inventario[producto - 1].nombre, "");
+    inventario[producto - 1].precio = 0.0;
+    inventario[producto - 1].inventario = 0;
+}
+
+void cambiarNombreProducto(int producto) {
+    if (producto < 1 || producto > MAX_PRODUCTOS) {
+        printf("Opción inválida. Por favor, seleccione un producto válido.\n");
+        return;
+    }
+
+    char nuevoNombre[50];
+    printf("Ingrese el nuevo nombre para %s: ", inventario[producto - 1].nombre);
+    scanf("%s", nuevoNombre);
+    strcpy(inventario[producto - 1].nombre, nuevoNombre);
+    printf("El nombre del producto se ha actualizado exitosamente.\n");
+}
+
+void cambiarPrecioProducto(int producto) {
+    if (producto < 1 || producto > MAX_PRODUCTOS) {
+        printf("Opción inválida. Por favor, seleccione un producto válido.\n");
+        return;
+    }
+
+    float nuevoPrecio;
+    printf("Ingrese el nuevo precio para %s: ", inventario[producto - 1].nombre);
+    scanf("%f", &nuevoPrecio);
+    inventario[producto - 1].precio = nuevoPrecio;
+    printf("El precio del producto se ha actualizado exitosamente.\n");
+}
+
+void agregarProducto() {
+    int indiceVacio = -1;
+    for (int i = 0; i < MAX_PRODUCTOS; i++) {
+        if (strcmp(inventario[i].nombre, "") == 0) {
+            indiceVacio = i;
+            break;
+        }
+    }
+
+    if (indiceVacio == -1) {
+        printf("No hay espacio disponible para agregar más productos.\n");
+        return;
+    }
+
+    printf("Agregar un nuevo producto:\n");
+    printf("Ingrese el nombre del nuevo producto: ");
+    scanf("%s", inventario[indiceVacio].nombre);
+
+    printf("Ingrese el precio del nuevo producto: ");
+    scanf("%f", &inventario[indiceVacio].precio);
+
+    printf("Ingrese el inventario inicial del nuevo producto: ");
+    scanf("%d", &inventario[indiceVacio].inventario);
+
+    printf("El nuevo producto se ha agregado exitosamente.\n");
+}
+
+int main() {
+    inicializarInventario();
+
+    int opcion;
+    int admin = 0;
+    char contrasena[20];
+
+    printf("¡Bienvenido a GLYKO!\n");
+
+    do {
+        printf("\nMÁQUINA EXPENDEDORA\n");
+        printf("1. Mostrar inventario de venta\n");
+        printf("2. Seleccionar producto y pagar\n");
+        printf("3. Modo administrador\n");
+        printf("0. Salir\n");
+        printf("Ingrese una opción: ");
+        scanf("%d", &opcion);
+
+        switch (opcion) {
+            case 1:
+                mostrarProductos();
+                break;
+            case 2:
+                if (admin) {
+                    printf("Ingrese la contraseña del administrador: ");
+                    scanf("Ingrese la contraseña del administrador: ");
+                    scanf("%s", contrasena);
+
+                    // Lógica para verificar la contraseña y permitir el acceso al modo administrador
+                    if (strcmp(contrasena, "admin") == 0) {
+                        mostrarInformacionAdmin();
+                        break;
+                    } else {
+                        printf("Contraseña incorrecta. Acceso denegado.\n");
+                        break;
+                    }
+                }
+
+                int producto;
+                printf("Ingrese el número del producto a comprar: ");
+                scanf("%d", &producto);
+                comprarProducto(producto);
+                break;
+            case 3:
+                if (admin) {
+                    printf("Ya estás en modo administrador.\n");
+                    break;
+                }
+
+                printf("Ingrese la contraseña del administrador: ");
+                scanf("%s", contrasena);
+
+                // Lógica para verificar la contraseña y permitir el acceso al modo administrador
+                if (strcmp(contrasena, "admin") == 0) {
+                    admin = 1;
+
+                    int opcionAdmin;
+                    do {
+                        printf("\nMODO ADMINISTRADOR\n");
+                        printf("1. Mostrar inventario completo\n");
+                        printf("2. Resurtir máquina\n");
+                        printf("3. Mostrar información del administrador\n");
+                        printf("4. Eliminar producto\n");
+                        printf("5. Cambiar nombre de producto\n");
+                        printf("6. Cambiar precio de producto\n");
+                        printf("7. Agregar producto\n");
+                        printf("8. Salir del modo administrador\n");
+                        printf("Ingrese una opción: ");
+                        scanf("%d", &opcionAdmin);
+
+                        switch (opcionAdmin) {
+                            case 1:
+                                mostrarProductos();
+                                break;
+                            case 2:
+                                resurtirMaquina();
+                                break;
+                            case 3:
+                                mostrarInformacionAdmin();
+                                break;
+                            case 4:
+                                printf("Ingrese el número del producto a eliminar: ");
+                                scanf("%d", &producto);
+                                eliminarProducto(producto);
+                                break;
+                            case 5:
+                                printf("Ingrese el número del producto para cambiar su nombre: ");
+                                scanf("%d", &producto);
+                                cambiarNombreProducto(producto);
+                                break;
+                            case 6:
+                                printf("Ingrese el número del producto para cambiar su precio: ");
+                                scanf("%d", &producto);
+                                cambiarPrecioProducto(producto);
+                                break;
+                            case 7:
+                                agregarProducto();
+                                break;
+                            case 8:
+                                admin = 0;
+                                printf("Volviendo al menú principal...\n");
+                                break;
+                            default:
+                                printf("Opción inválida. Por favor, seleccione una opción válida.\n");
+                        }
+                    } while (opcionAdmin != 8);
+                } else {
+                    printf("Contraseña incorrecta. Acceso denegado.\n");
+                }
+                break;
+            case 0:
+                printf("Gracias por utilizar GLYKO. ¡Hasta luego!\n");
+                break;
+            default:
+                printf("Opción inválida. Por favor, seleccione una opción válida.\n");
+        }
+    } while (opcion != 0);
+
+    return 0;
+}

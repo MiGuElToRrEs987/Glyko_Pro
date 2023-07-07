@@ -1,0 +1,111 @@
+GLYKO - MÁQUINA EXPENDEDORA
+
+¡Bienvenido a GLYKO!
+
+Este programa es una máquina expendedora básica escrita en C. Permite a los usuarios seleccionar productos, pagar, recibir cambio y a los administradores realizar tareas como resurtir la máquina, eliminar productos, cambiar precios, etc.
+
+Requisitos de sistema:
+- Sistema operativo compatible con compilador GCC
+- Compilador GCC instalado
+
+Instrucciones de configuración y ejecución:
+
+Paso 1: Descargar el código fuente
+Descargue el archivo ZIP del repositorio de GitHub: [enlace al repositorio]
+Extraiga los archivos en una ubicación local de su preferencia.
+
+Paso 2: Compilar el código fuente
+Abra una terminal y navegue hasta el directorio donde extrajo los archivos.
+Ejecute el siguiente comando para compilar el código fuente:
+
+    gcc maquina_expendedora.c -o maquina_expendedora
+
+Esto generará el ejecutable "maquina_expendedora" en el mismo directorio.
+
+Paso 3: Ejecutar el programa
+En la misma terminal, ejecute el siguiente comando para iniciar el programa:
+
+    ./maquina_expendedora
+
+El programa se iniciará y se mostrará un menú con opciones para interactuar con la máquina expendedora.
+
+Guía de uso:
+
+1. Mostrar inventario de venta:
+   Esta opción muestra los productos disponibles en la máquina expendedora junto con sus precios e inventarios actuales.
+
+2. Seleccionar producto y pagar:
+   Seleccione esta opción para realizar una compra. Se le pedirá que ingrese el número del producto deseado y la cantidad. Luego, se le solicitará que ingrese el monto de pago. Si el pago es suficiente, el producto se despachará y se mostrará el cambio.
+
+3. Modo administrador:
+   Esta opción permite ingresar al modo de administrador. Se le pedirá que ingrese una contraseña para acceder a las funciones adicionales, como resurtir la máquina, mostrar información del administrador, eliminar productos, cambiar nombre y precio de productos existentes, y agregar nuevos productos.
+
+0. Salir:
+   Seleccione esta opción para salir del programa.
+
+Recuerde que las funciones del modo administrador solo estarán disponibles si se ingresa la contraseña correcta.
+
+¡Disfrute utilizando GLYKO!
+
+GLYKO - MÁQUINA EXPENDEDORA
+Manual de Uso y Funciones
+
+¡Bienvenido a GLYKO!
+
+Este manual proporciona una guía detallada sobre cómo utilizar y aprovechar al máximo las funciones de la máquina expendedora GLYKO.
+
+Uso básico:
+
+1.1. Mostrar inventario de venta:
+- Seleccione la opción "Mostrar inventario de venta" en el menú principal.
+- Se mostrará una lista de los productos disponibles en la máquina, junto con sus precios e inventarios actuales.
+
+1.2. Seleccionar producto y pagar:
+- Seleccione la opción "Seleccionar producto y pagar" en el menú principal.
+- Ingrese el número del producto deseado y la cantidad.
+- Luego, ingrese el monto de pago.
+- Si el pago es suficiente, el producto se despachará y se mostrará el cambio.
+
+Modo administrador:
+
+2.1. Acceso al modo administrador:
+- Seleccione la opción "Modo administrador" en el menú principal.
+- Se le solicitará que ingrese una contraseña para acceder al modo administrador.
+
+2.2. Resurtir máquina:
+- Dentro del modo administrador, seleccione la opción "Resurtir máquina".
+- Ingrese la cantidad de cada producto que desea agregar al inventario.
+- El inventario se actualizará con los nuevos productos.
+
+2.3. Mostrar información del administrador:
+- Dentro del modo administrador, seleccione la opción "Mostrar información del administrador".
+- Se mostrará la cantidad de dinero disponible en la máquina y el número total de ventas realizadas.
+
+2.4. Eliminar producto:
+- Dentro del modo administrador, seleccione la opción "Eliminar producto".
+- Ingrese el número del producto que desea eliminar.
+- El producto se eliminará del inventario.
+
+2.5. Cambiar nombre de producto:
+- Dentro del modo administrador, seleccione la opción "Cambiar nombre de producto".
+- Ingrese el número del producto al que desea cambiarle el nombre.
+- Ingrese el nuevo nombre del producto.
+- El nombre del producto se actualizará en el inventario.
+
+2.6. Cambiar precio de producto:
+- Dentro del modo administrador, seleccione la opción "Cambiar precio de producto".
+- Ingrese el número del producto al que desea cambiarle el precio.
+- Ingrese el nuevo precio del producto.
+- El precio del producto se actualizará en el inventario.
+
+2.7. Agregar producto:
+- Dentro del modo administrador, seleccione la opción "Agregar producto".
+- Ingrese el nombre, precio e inventario del nuevo producto.
+- El producto se agregará al inventario.
+
+Salir del programa:
+
+Seleccione la opción "Salir" en el menú principal para cerrar el programa.
+¡Disfrute utilizando GLYKO y aproveche al máximo todas sus funciones!
+
+Recuerde que el modo administrador solo estará disponible con la contraseña correcta.
