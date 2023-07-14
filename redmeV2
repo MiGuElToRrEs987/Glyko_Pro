@@ -1,0 +1,46 @@
+Máquina expendedora de dulces - README
+
+Este programa en C implementa una máquina expendedora de dulces. Permite a los usuarios seleccionar y comprar productos, así como también ofrece un modo de administrador para gestionar el inventario y obtener información adicional.
+
+Modificaciones realizadas:
+
+1. Mostrar inventario inicial: Se agregó la funcionalidad para mostrar el inventario de productos al inicio del programa, antes de desplegar el menú principal.
+
+2. Mejoras en la lógica de compra: Se añadieron verificaciones adicionales, como verificar si el producto está agotado antes de realizar la compra.
+
+3. Acceso al modo administrador: Ahora, al introducir la contraseña de administrador, se muestra directamente el menú de administrador, evitando la necesidad de ingresar nuevamente al menú principal y luego al modo administrador.
+
+4. Agregar y eliminar productos: Se agregaron opciones para agregar nuevos productos al inventario y eliminar productos existentes.
+
+5. Cambiar nombre y precio de producto: Se incluyeron opciones para cambiar el nombre y el precio de un producto existente en el inventario.
+
+6. Resurtir máquina: Se implementó la funcionalidad para resurtir el inventario de la máquina, permitiendo aumentar la cantidad de productos disponibles.
+
+Mejoras adicionales:
+
+- Se realizaron mejoras en la estructura del código para hacerlo más legible y fácil de entender.
+
+- Se agregaron comentarios explicativos en las secciones clave del código para facilitar su comprensión.
+
+- Se mejoró la interacción con el usuario mediante mensajes claros y descriptivos.
+
+- Se realizaron pruebas exhaustivas para garantizar un funcionamiento correcto y manejo adecuado de errores.
+
+----------------------------------------------------------------------------------
+
+Instrucciones de uso:
+
+1. Compilación: Utiliza un compilador de C para compilar el código fuente. Por ejemplo, puedes usar el comando "gcc main.c -o vending_machine" para generar un ejecutable llamado "vending_machine".
+
+2. Ejecución: Una vez compilado, ejecuta el programa proporcionando el nombre del ejecutable. Por ejemplo, en sistemas Unix, puedes ejecutar el programa con "./vending_machine".
+
+3. Interacción: Sigue las instrucciones en pantalla para realizar compras, acceder al modo administrador y gestionar el inventario de la máquina.
+
+4. Modo administrador: Para acceder al modo administrador, se debe ingresar la contraseña de administrador correcta. Por defecto, se utiliza la contraseña "admin". Puedes cambiarla modificando el código fuente.
+
+5. Modificaciones y mejoras: Si deseas realizar modificaciones o mejoras adicionales, puedes editar el código fuente y volver a compilar el programa.
+
+----------------------------------------------------------------------------------
+
+¡Disfruta de tu experiencia con la máquina expendedora de dulces!
+
