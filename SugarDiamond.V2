@@ -51,7 +51,7 @@ void comprarProducto(int producto) {
     }
 
     if (inventario[producto - 1].inventario == 0) {
-        printf("Lo siento, el producto seleccionado está agotado.\n");
+        printf("Lo siento, el producto seleccionado está agotado. Por favor, elija otra opción.\n");
         return;
     }
 
@@ -60,7 +60,7 @@ void comprarProducto(int producto) {
     scanf("%d", &cantidad);
 
     if (cantidad > inventario[producto - 1].inventario) {
-        printf("No hay suficiente inventario. Por favor, elija una cantidad menor.\n");
+        printf("Lo siento, no tenemos suficiente inventario de %s. Por favor, elija otra opción.\n", inventario[producto - 1].nombre);
         return;
     }
 
@@ -78,6 +78,25 @@ void comprarProducto(int producto) {
 
     float cambio = pago - total;
     printf("Su cambio es: %.2f\n", cambio);
+
+    if (cambio > 0) {
+        printf("Por favor, recoja su cambio: %.2f\n", cambio);
+    }
+
+    if (cambio < 0) {
+        printf("El pago es insuficiente. Le faltan %.2f para completar la compra. ¿Desea cancelar la compra? (s/n): ", -cambio);
+        char opcion;
+        scanf(" %c", &opcion);
+        if (opcion == 's' || opcion == 'S') {
+            printf("Compra cancelada. Recuerde recoger su dinero.\n");
+            return;
+        }
+    }
+
+    if (cantidad > inventario[producto - 1].inventario) {
+        printf("Lo siento, no tenemos suficiente inventario de %s. Por favor, elija otra opción.\n", inventario[producto - 1].nombre);
+        return;
+    }
 
     // Lógica para despachar el producto
     printf("Despachando %d %s...\n", cantidad, inventario[producto - 1].nombre);
