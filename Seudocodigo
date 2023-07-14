@@ -1,0 +1,241 @@
+Algoritmo inicializarInventario
+    Para i = 0 hasta MAX_PRODUCTOS hacer
+        inventario[i].nombre = "Dulce " + i+1
+        inventario[i].precio = 10.0 + (i * 2.0)
+        inventario[i].inventario = 5 + i
+    Fin Para
+Fin Algoritmo
+
+Algoritmo mostrarProductos
+    Escribir "Productos disponibles:"
+    Para i = 0 hasta MAX_PRODUCTOS hacer
+        Escribir i+1 + ". " + inventario[i].nombre + " - Precio: " + inventario[i].precio + " - Inventario: " + inventario[i].inventario
+    Fin Para
+Fin Algoritmo
+
+Algoritmo comprarProducto(producto)
+    Si producto < 1 o producto > MAX_PRODUCTOS entonces
+        Escribir "Opción inválida. Por favor, seleccione un producto válido."
+        retornar
+    Fin Si
+
+    Escribir "Ingrese la cantidad de " + inventario[producto - 1].nombre + " a comprar: "
+    Leer cantidad
+
+    Si cantidad > inventario[producto - 1].inventario entonces
+        Escribir "No hay suficiente inventario. Por favor, elija una cantidad menor."
+        retornar
+    Fin Si
+
+    total = inventario[producto - 1].precio * cantidad
+    Escribir "El total a pagar es: " + total
+
+    Escribir "Ingrese el monto de pago: "
+    Leer pago
+
+    Si pago < total entonces
+        Escribir "El pago es insuficiente. No se puede completar la compra."
+        retornar
+    Fin Si
+
+    cambio = pago - total
+    Escribir "Su cambio es: " + cambio
+
+    Escribir "Despachando " + cantidad + " " + inventario[producto - 1].nombre + "..."
+    inventario[producto - 1].inventario = inventario[producto - 1].inventario - cantidad
+Fin Algoritmo
+
+Algoritmo resurtirMaquina
+    Escribir "Resurtir la máquina:"
+    Para i = 0 hasta MAX_PRODUCTOS hacer
+        Escribir "Ingrese la cantidad de " + inventario[i].nombre + " a resurtir: "
+        Leer cantidad
+        inventario[i].inventario = inventario[i].inventario + cantidad
+    Fin Para
+Fin Algoritmo
+
+Algoritmo mostrarInformacionAdmin
+    Escribir "Información del administrador:"
+    // Lógica para mostrar saldo, número de ventas, etc.
+Fin Algoritmo
+
+Algoritmo eliminarProducto(producto)
+    Si producto < 1 o producto > MAX_PRODUCTOS entonces
+        Escribir "Opción inválida. Por favor, seleccione un producto válido."
+        retornar
+    Fin Si
+
+    Escribir "Eliminando " + inventario[producto - 1].nombre + " del inventario..."
+    inventario[producto - 1].nombre = ""
+    inventario[producto - 1].precio = 0.0
+    inventario[producto - 1].inventario = 0
+Fin Algoritmo
+
+Algoritmo cambiarNombreProducto(producto)
+    Si producto < 1 o producto > MAX_PRODUCTOS entonces
+        Escribir "Opción inválida. Por favor, seleccione un producto válido."
+        retornar
+    Fin Si
+
+    Escribir "Ingrese el nuevo nombre para " + inventario[producto - 1].nombre + ": "
+    Leer nuevoNombre
+    inventario[producto - 1].nombre = nuevoNombre
+    Escribir "El nombre del producto se ha actualizado exitosamente."
+Fin Algoritmo
+
+Algoritmo cambiarPrecioProducto(producto)
+    Si producto < 1 o producto > MAX_PRODUCTOS entonces
+        Escribir "Opción inválida. Por favor, seleccione un producto válido."
+        retornar
+    Fin Si
+
+    Escribir "Ingrese el nuevo precio para " + inventario[producto - 1].nombre + ": "
+    Leer nuevoPrecio
+    inventario[producto - 1].precio = nuevoPrecio
+    Escribir "El precio del producto se ha actualizado exitosamente."
+Fin Algoritmo
+
+Algoritmo agregarProducto
+    indiceVacio = -1
+    Para i = 0 hasta MAX_PRODUCTOS hacer
+        Si inventario[i].nombre = "" entonces
+            indiceVacio = i
+            romper
+        Fin Si
+    Fin Para
+
+    Si indiceVacio = -1 entonces
+        Escribir "No hay espacio disponible para agregar más productos."
+        retornar
+    Fin Si
+
+    Escribir "Agregar un nuevo producto:"
+    Escribir "Ingrese el nombre del nuevo producto: "
+    Leer inventario[indiceVacio].nombre
+
+    Escribir "Ingrese el precio del nuevo producto: "
+    Leer inventario[indiceVacio].precio
+
+    Escribir "Ingrese el inventario inicial del nuevo producto: "
+    Leer inventario[indiceVacio].inventario
+
+    Escribir "El nuevo producto se ha agregado exitosamente."
+Fin Algoritmo
+
+Inicio
+    inicializarInventario()
+
+    opcion = -1
+    admin = 0
+    contrasena = ""
+
+    Escribir "¡Bienvenido a Sugar Diamond GLYKO!"
+
+    Mientras opcion != 0 hacer
+        Escribir "\nMÁQUINA EXPENDEDORA"
+        Escribir "1. Mostrar inventario de venta"
+        Escribir "2. Seleccionar producto y pagar"
+        Escribir "3. Modo administrador"
+        Escribir "0. Salir"
+        Escribir "Ingrese una opción: "
+        Leer opcion
+
+        Según opcion hacer
+            caso 1:
+                mostrarProductos()
+                romper
+            caso 2:
+                Si admin entonces
+                    Escribir "Ingrese la contraseña del administrador: "
+                    Leer contrasena
+
+                    // Lógica para verificar la contraseña y permitir el acceso al modo administrador
+                    Si contrasena = "admin" entonces
+                        mostrarInformacionAdmin()
+                        romper
+                    Sino
+                        Escribir "Contraseña incorrecta. Acceso denegado."
+                        romper
+                    Fin Si
+                Fin Si
+
+                producto = -1
+                Escribir "Ingrese el número del producto a comprar: "
+                Leer producto
+                comprarProducto(producto)
+                romper
+            caso 3:
+                Si admin entonces
+                    Escribir "Ya estás en modo administrador."
+                    romper
+                Fin Si
+
+                Escribir "Ingrese la contraseña del administrador: "
+                Leer contrasena
+
+                // Lógica para verificar la contraseña y permitir el acceso al modo administrador
+                Si contrasena = "admin" entonces
+                    admin = 1
+
+                    opcionAdmin = -1
+                    Mientras opcionAdmin != 8 hacer
+                        Escribir "\nMODO ADMINISTRADOR"
+                        Escribir "1. Mostrar inventario completo"
+                        Escribir "2. Resurtir máquina"
+                        Escribir "3. Mostrar información del administrador"
+                        Escribir "4. Eliminar producto"
+                        Escribir "5. Cambiar nombre de producto"
+                        Escribir "6. Cambiar precio de producto"
+                        Escribir "7. Agregar producto"
+                        Escribir "8. Salir del modo administrador"
+                        Escribir "Ingrese una opción: "
+                        Leer opcionAdmin
+
+                        Según opcionAdmin hacer
+                            caso 1:
+                                mostrarProductos()
+                                romper
+                            caso 2:
+                                resurtirMaquina()
+                                romper
+                            caso 3:
+                                mostrarInformacionAdmin()
+                                romper
+                            caso 4:
+                                Escribir "Ingrese el número del producto a eliminar: "
+                                Leer producto
+                                eliminarProducto(producto)
+                                romper
+                            caso 5:
+                                Escribir "Ingrese el número del producto para cambiar su nombre: "
+                                Leer producto
+                                cambiarNombreProducto(producto)
+                                romper
+                            caso 6:
+                                Escribir "Ingrese el número del producto para cambiar su precio: "
+                                Leer producto
+                                cambiarPrecioProducto(producto)
+                                romper
+                            caso 7:
+                                agregarProducto()
+                                romper
+                            caso 8:
+                                admin = 0
+                                Escribir "Volviendo al menú principal..."
+                                romper
+                            otro caso:
+                                Escribir "Opción inválida. Por favor, seleccione una opción válida."
+                        Fin Según
+                    Fin Mientras
+                Sino
+                    Escribir "Contraseña incorrecta. Acceso denegado."
+                Fin Si
+                romper
+            caso 0:
+                Escribir "Gracias por utilizar Sugar Diamond GLYKO. ¡Hasta luego!"
+                romper
+            otro caso:
+                Escribir "Opción inválida. Por favor, seleccione una opción válida."
+        Fin Según
+    Fin Mientras
+Fin
